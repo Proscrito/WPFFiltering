@@ -1,0 +1,31 @@
+﻿<Window x:Class="FilterDataSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Filtering Data Samples"
+        WindowStartupLocation="CenterScreen">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <Menu x:Name="menu"
+          IsMainMenu="True">
+      <MenuItem Header="File">
+        <MenuItem Header="Exit"
+                  Tag="Exit"
+                  Click="ExitMenuItem_Click" />
+      </MenuItem>
+      <MenuItem Header="Customer Search"
+                Click="CustomerSearchMenuItem_Click" />
+      <MenuItem Header="Customer Filter 1"
+                Click="CustomerFilterMenuItem_Click" />
+      <MenuItem Header="Customer Filter 2"
+                Click="CustomerFilter2MenuItem_Click" />
+    </Menu>
+    <Grid x:Name="contentArea"
+          Grid.Row="1" />
+  </Grid>
+</Window>

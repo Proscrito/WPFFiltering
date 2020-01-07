@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="FilterDataSample.UserControls.CustomerFilterControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:FilterDataSample.ViewModels"
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d"
+             d:DesignHeight="400"
+             d:DesignWidth="600">
+  <UserControl.Resources>
+    <vm:CustomerViewModel x:Key="viewModel" />
+    <Style TargetType="ComboBox">
+      <Setter Property="Margin"
+              Value="0" />
+    </Style>
+  </UserControl.Resources>
+  <Grid DataContext="{Binding Source={StaticResource viewModel}}">
+    <DataGrid ItemsSource="{Binding Path=FilteredCustomers}"
+              AutoGenerateColumns="False"
+              IsReadOnly="True">
+      <DataGrid.Columns>
+        <DataGridTextColumn Binding="{Binding Path=CustomerID}"
+                            Header="Customer ID" />
+        <DataGridTemplateColumn>
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Path=Title}" />
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.HeaderTemplate>
+            <DataTemplate>
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Text="Title" />
+                <ComboBox Grid.Row="1"
+                          SelectedValue="{Binding Path=SelectedTitle, Source={StaticResource viewModel}}"
+                          ItemsSource="{Binding Path=Titles, Source={StaticResource viewModel}}" />
+              </Grid>
+            </DataTemplate>
+          </DataGridTemplateColumn.HeaderTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTextColumn Binding="{Binding Path=FullName}"
+                            Header="Full Name" />
+        <DataGridTextColumn Binding="{Binding Path=Suffix}"
+                            Header="Suffix" />
+        <DataGridTextColumn Binding="{Binding Path=CompanyName}"
+                            Header="Company Name" />
+        <DataGridTemplateColumn>
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Path=SalesPerson}" />
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.HeaderTemplate>
+            <DataTemplate>
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Text="Sales Person" />
+                <ComboBox Grid.Row="1"
+                          SelectedValue="{Binding Path=SelectedSalesPerson, Source={StaticResource viewModel}}"
+                          ItemsSource="{Binding Path=SalesPeople, Source={StaticResource viewModel}}" />
+              </Grid>
+            </DataTemplate>
+          </DataGridTemplateColumn.HeaderTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTextColumn Binding="{Binding Path=EmailAddress}"
+                            Header="Email Address" />
+        <DataGridTextColumn Binding="{Binding Path=Phone}"
+                            Header="Phone" />
+      </DataGrid.Columns>
+    </DataGrid>
+  </Grid>
+</UserControl>
